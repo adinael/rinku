@@ -1,13 +1,13 @@
-IF EXISTS( SELECT * from sys.objects where name = 'proc_obtenerempleado' and type = 'P' ) 
+IF EXISTS( SELECT * from sys.objects where name = 'proc_consultarempleado' and type = 'P' ) 
 BEGIN 
-	DROP PROC dbo.proc_obtenerempleado
+	DROP PROC dbo.proc_consultarempleado
 END
 GO
-CREATE PROCEDURE proc_obtenerempleado @idempleado int 
+CREATE PROCEDURE proc_consultarempleado @idempleado int 
 AS 
 BEGIN 
-	SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, a.id_rol, a.id_tipo,
-		b.des_rol, c.des_tipoempleado
+	SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, 
+			a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
 	FROM dbo.empleados a (NOLOCK) 
 	JOIN dbo.roles b (NOLOCK) 
 		ON(a.id_rol = b.id_rol) 
