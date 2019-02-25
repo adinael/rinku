@@ -23,7 +23,7 @@ export class FormEmpleadoComponent implements OnInit {
 
   inicializarFormulario(): FormGroup {
     return new FormGroup({
-      id_empleado: new FormControl('', Validators.required),
+      id_empleado: new FormControl({value : '', disabled:true }, Validators.required),
       des_nombre: new FormControl('', Validators.required),
       des_apellido: new FormControl('', Validators.required),
       num_edad: new FormControl('1', Validators.required),
