@@ -1,11 +1,17 @@
-IF EXISTS( SELECT * from sys.objects where name = 'proc_consultarempleado' and type = 'P' ) 
+IF EXISTS( SELECT name FROM sysobjects WHERE name = 'proc_consultarempleado' and TYPE = 'P' ) 
 BEGIN 
 	DROP PROC dbo.proc_consultarempleado
 END
 GO
-CREATE PROCEDURE proc_consultarempleado @idempleado int 
+SET QUOTED_IDENTIFIER OFF
+GO
+SET ANSI_NULLS ON
+GO
+
+CREATE PROCEDURE proc_consultarempleado @idempleado INT 
 AS 
 BEGIN 
+	SET NOCOUNT ON
 	SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, 
 			a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
 	FROM dbo.empleados a (NOLOCK) 

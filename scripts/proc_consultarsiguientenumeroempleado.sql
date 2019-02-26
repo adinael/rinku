@@ -6,6 +6,7 @@ GO
 CREATE PROCEDURE dbo.proc_consultarsiguientenumeroempleado 
 AS 
 BEGIN 
-	SELECT ISNULL(IDENT_CURRENT ('dbo.empleados'),90) + 10 AS numeroempleado;  
+	 
+	SELECT ISNULL(IDENT_CURRENT ('dbo.cat_empleados'),90) + 10 AS numeroempleado;  
 END
 GO 

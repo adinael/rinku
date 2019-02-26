@@ -9,6 +9,7 @@ CREATE PROCEDURE dbo.proc_consultarroles @idrol INT = 0
 
 AS 
 BEGIN 
+	SET NOCOUNT ON
 	IF @idrol = 0
 	BEGIN
 		SELECT id_rol, des_rol, imp_sueldobase, num_horaslaborales, imp_entregacliente, imp_bonoextra, opc_cubreroles
