@@ -8,11 +8,16 @@ GO
 SET ANSI_NULLS ON
 GO
 
-CREATE PROCEDURE dbo.proc_grabarmovimiento @idempleado INT, @diatrabajo DATE, @numentregas INT, @idempleadocubre INT
+CREATE PROCEDURE dbo.proc_grabarmovimiento @idempleado INT, @fecdiatrabajado DATE, @numentregas INT, @idempleadocubre INT
 AS 
 BEGIN 
 	SET NOCOUNT ON
+	DELETE FROM dbo.ctl_movimientos
+	WHERE id_empleado = @idempleado AND fec_diatrabajado = @fecdiatrabajado
+	
 	INSERT INTO dbo.ctl_movimientos (id_empleado, fec_diatrabajado, num_entregas, id_empleadocubre)
-	VALUES(@idempleado, @diatrabajo, @numentregas, @idempleadocubre)
+	VALUES(@idempleado, @fecdiatrabajado, @numentregas, @idempleadocubre)
+	
+	SELECT ISNULL(IDENT_CURRENT ('dbo.ctl_movimientos'),1) AS idmovimiento
 END 
 GO

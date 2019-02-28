@@ -11,35 +11,52 @@ import { TestBed } from '@angular/core/testing';
 })
 export class FormEmpleadoComponent implements OnInit {
 
-  public formEmpleados : FormGroup;
+  public formEmpleados: FormGroup;
+  public rolesEmpleados: any;
+  public tiposEmpleados: any;
   @ViewChild('test') test: ElementRef;
   constructor(
-    private servicioEmpleados : EmpleadosService) { }
+    private servicioEmpleados: EmpleadosService) { }
 
   ngOnInit() {
+    this. consultarRolesEmpleado();
+    this.consultarTiposEmpleado();
     this.formEmpleados = this.inicializarFormulario();
     this.test.nativeElement.focus();
   }
 
   inicializarFormulario(): FormGroup {
     return new FormGroup({
-      id_empleado: new FormControl({value : '', disabled:true }, Validators.required),
-      des_nombre: new FormControl('', Validators.required),
-      des_apellido: new FormControl('', Validators.required),
-      num_edad: new FormControl('1', Validators.required),
-      num_tipo: new FormControl('1', Validators.required),
-      id_rol: new FormControl('1', Validators.required)
+      idEmpleado: new FormControl({value : '120', disabled: true }, Validators.required),
+      nomEmpleado: new FormControl('', Validators.required),
+      apellidoEmpleado: new FormControl('', Validators.required),
+      numEdad: new FormControl('1', Validators.required),
+      idRol: new FormControl('1', Validators.required),
+      idTipo: new FormControl('1', Validators.required)
     });
   }
 
-  guardarEmpleado() : void {
+  consultarRolesEmpleado(): void {
+    this.servicioEmpleados.consultarRolesEmpleado().subscribe(d => {
+        console.log(d.data.roles);
+        this.rolesEmpleados = d.data.roles;
+    });
+  }
+
+  consultarTiposEmpleado(): void {
+    this.servicioEmpleados.consultarTiposEmpleado().subscribe(d => {
+        console.log(d.data.tipos);
+        this.tiposEmpleados = d.data.tipos;
+    });
+  }
+
+  guardarEmpleado(): void {
     if ( this.formEmpleados.invalid ) {
       return;
-     
-    } 
+    }
     this.servicioEmpleados.guardar(this.formEmpleados.value).subscribe( d => {
-      console.log("usuario agregado con exito");
+      console.log('EL numero de empleado es: ' + d.data.response.numeroEmpleado);
       this.formEmpleados = this.inicializarFormulario();
-    })
+    });
   }
 }

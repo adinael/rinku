@@ -20,6 +20,14 @@ BEGIN
 		id_rol = @idrol, 
 		id_tipo = @idtipo
 	WHERE id_empleado = @idempleado
-
+	
+	SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, 
+		a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
+	FROM dbo.cat_empleados a (NOLOCK) 
+	JOIN dbo.cat_roles b (NOLOCK) 
+		ON(a.id_rol = b.id_rol) 
+	JOIN dbo.cat_tipoempleados c (NOLOCK) 
+		ON (a.id_tipo = c.id_tipo) 
+	WHERE id_empleado = @idempleado
 END
-GO 
+GO

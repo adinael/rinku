@@ -1,4 +1,7 @@
 export class Empleado {
-    id_empleado : number;
-    des_nombre : string;
+    idEmpleado: number;
+    nomEmpleado: string;
+    numEdad: number;
+    idRol: number;
+    idTipo: number;
 }

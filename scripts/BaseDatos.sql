@@ -1,11 +1,25 @@
 USE Nominarinku 
---DROP TABLE ctl_movimientos 
---DROP TABLE empleados
---DROP TABLE roles 
---DROP TABLE tipoempleados
---DROP TABLE impuestos		
 
-
+IF EXISTS( SELECT * from sys.objects where name = 'ctl_movimientos' and type = 'U' ) 
+BEGIN 
+	DROP TABLE dbo.ctl_movimientos
+END
+GO
+CREATE TABLE ctl_movimientos 
+(
+    id_movimiento INT IDENTITY,
+    id_empleado INT NOT NULL DEFAULT 0,
+    fec_diatrabajado DATE NOT NULL DEFAULT '1900-01-01',
+    num_entregas INT NOT NULL DEFAULT 0,
+    id_empleadocubre INT NOT NULL DEFAULT 0,
+    fec_movimiento SMALLDATETIME NOT NULL DEFAULT GETDATE()
+)
+GO
+IF EXISTS( SELECT * from sys.objects where name = 'cat_empleados' and type = 'U' ) 
+BEGIN 
+	DROP TABLE dbo.cat_empleados
+END
+GO
 CREATE TABLE cat_empleados(
     id_empleado INT IDENTITY(100,10),
 	des_nombre VARCHAR(50) NOT NULL DEFAULT '',
@@ -14,7 +28,12 @@ CREATE TABLE cat_empleados(
     id_rol INT NOT NULL DEFAULT 0,
     id_tipo INT NOT NULL DEFAULT 0
 )
-
+GO 
+IF EXISTS( SELECT * from sys.objects where name = 'cat_roles' and type = 'U' ) 
+BEGIN 
+	DROP TABLE dbo.cat_roles
+END
+GO
 CREATE TABLE cat_roles 
 (
     id_rol INT  IDENTITY,
@@ -25,29 +44,32 @@ CREATE TABLE cat_roles
     imp_bonoextra INT NOT NULL DEFAULT 0, 
     opc_cubreroles BIT NOT NULL DEFAULT 0
 )
-
+GO 
+IF EXISTS( SELECT * from sys.objects where name = 'cat_tipoempleados' and type = 'U' ) 
+BEGIN 
+	DROP TABLE dbo.cat_tipoempleados
+END
+GO
 CREATE TABLE cat_tipoempleados
 (
     id_tipo INT IDENTITY,
     des_tipoempleado VARCHAR(50) NOT NULL DEFAULT 0,
     prc_valesdespensa real NOT NULL DEFAULT 0 
 )
- 
+GO 
+IF EXISTS( SELECT * from sys.objects where name = 'cat_impuestos' and type = 'U' ) 
+BEGIN 
+	DROP TABLE dbo.cat_impuestos
+END
+GO
 CREATE TABLE cat_impuestos
 (
     prc_isr REAL NOT NULL DEFAULT 0,
     prc_isradicional REAL NOT NULL DEFAULT 0,
     imp_salarioisradicional INT NOT NULL DEFAULT 0
 )
+GO
 
-CREATE TABLE ctl_movimientos 
-(
-    id_movimiento INT IDENTITY,
-    id_empleado INT NOT NULL DEFAULT 0,
-    fec_diatrabajado DATE NOT NULL DEFAULT '1900-01-01',
-    num_entregas INT NOT NULL DEFAULT 0,
-    id_empleadocubre INT NOT NULL DEFAULT 0
-)
  
 ALTER TABLE cat_roles
 	ADD CONSTRAINT pk_roles_id_rol
@@ -75,9 +97,9 @@ ALTER TABLE cat_empleados
    REFERENCES "cat_roles"(id_rol);
    
 ALTER TABLE ctl_movimientos 
-   ADD CONSTRAINT fk_roles
-   FOREIGN KEY (id_rol) 
-   REFERENCES "cat_roles"(id_rol);
+   ADD CONSTRAINT fk_movimientos_empleados
+   FOREIGN KEY (id_empleado) 
+   REFERENCES "cat_empleados"(id_empleado);
 
 INSERT INTO cat_roles(des_rol, imp_sueldobase, num_horaslaborales, imp_entregacliente, imp_bonoextra, opc_cubreroles)
 VALUES('Chofer',30,8,5,10,'0'),

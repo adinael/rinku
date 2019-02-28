@@ -4,33 +4,62 @@
 		
 		<div class="form-row">
       <label>Número</label>
-      <input type="text" class="form-control" placeholder="Número de empleado" formControlName="id_empleado">
+      <input type="text" class="form-control" placeholder="Número de empleado" formControlName="idEmpleado">
 			<small class="form-text text-danger" 
-							*ngIf="formEmpleados.get('id_empleado').getError('required') && formEmpleados.get('id_empleado').dirty" >
+							*ngIf="formEmpleados.get('idEmpleado').getError('required') && formEmpleados.get('idEmpleado').dirty" >
 							El numero de empleado es requerido</small>
 			<label>Nombre</label>
-			<input #test type="text" class="form-control" placeholder="Nombre de empleado" formControlName="des_nombre">
+			<input #test type="text" class="form-control" placeholder="Nombre de empleado" formControlName="nomEmpleado">
 			<small class="form-text text-danger" 
-							*ngIf="formEmpleados.get('des_nombre').getError('required') && formEmpleados.get('des_nombre').dirty" >	
+							*ngIf="formEmpleados.get('nomEmpleado').getError('required') && formEmpleados.get('nomEmpleado').dirty" >	
 							El nombre de empleado es requerido</small>
 		</div>
     <div class="form-row">
         <label>Apellido</label>
-        <input type="text" class="form-control" placeholder="Apellido" formControlName="des_apellido">
+        <input type="text" class="form-control" placeholder="Apellido" formControlName="apellidoEmpleado">
 				<small class="form-text text-danger" 
-								*ngIf="formEmpleados.get('des_apellido').getError('required') && formEmpleados.get('des_apellido').dirty" >
+								*ngIf="formEmpleados.get('apellidoEmpleado').getError('required') && formEmpleados.get('apellidoEmpleado').dirty" >
 								El apellido de empleado es requerido</small>
     </div>
     <div class="form-row">
         <label>Edad</label>
-        <input type="text" class="form-control" placeholder="Edad" formControlName="num_edad">
+        <input type="text" class="form-control" placeholder="Edad" formControlName="numEdad">
 				<small class="form-text text-danger" 
-								*ngIf="formEmpleados.get('des_apellido').getError('required') && formEmpleados.get('des_apellido').dirty" >
+								*ngIf="formEmpleados.get('numEdad').getError('required') && formEmpleados.get('numEdad').dirty" >
 								El apellido de empleado es requerido</small>
 		</div>
 		<br>
 		<div class="form-row">
-			<button type="button" (click)="guardarEmpleado()" class="btn btn-outline-primary" [disabled]="formEmpleados.invalid">Guardar</button>
-			<a class="btn btn-outline-danger" routerLink="/empleados">Cancelar</a>
+
+			<div class="col-md-6">
+				<div *ngFor="let rol of rolesEmpleados">
+					<span>{{ rol.desRol }}</span>
+					<input type="radio" name="idRol" 
+					[checked]="idx === 0" 
+					[value]="rol.idRol" 
+					(change)="onSelectionChange(rol)">
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<div *ngFor="let tipo of tiposEmpleados">
+					<span>{{ tipo.desTipoEmpleado }}</span>
+					<input type="radio" name="idTipo" 
+					[checked]="idx === 0" 
+					[value]="tipo.idTipo" 
+					(change)="onSelectionChange(tipo)">
+				</div>
+			</div>
+			
 		</div>
-  </form>
+		<br>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">
+				<button type="butt	on" (click)="guardarEmpleado()" class="btn btn-outline-primary" [disabled]="formEmpleados.invalid">Guardar</button>
+			</div>
+			<div class="col-xs-3">
+				<a class="btn btn-outline-danger" routerLink="/empleados">Cancelar</a>
+			</div>
+		</div>
+	</form>
