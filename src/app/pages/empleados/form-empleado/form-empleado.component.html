@@ -1,6 +1,6 @@
 <h5 class="card-title col-sm-6">Alta de empleados</h5>
 
-<form [formGroup]="formEmpleados" novalidate autocomplete="off" class="col-sm-6 col-xs-8">
+<form [formGroup]="formEmpleados" novalidate autocomplete="off" class="col-md-6 col-sm-7 col-xs-8">
 		
 		<div class="form-row">
       <label>Número</label>
@@ -8,58 +8,77 @@
 			<small class="form-text text-danger" 
 							*ngIf="formEmpleados.get('idEmpleado').getError('required') && formEmpleados.get('idEmpleado').dirty" >
 							El numero de empleado es requerido</small>
+		</div>
+		<div class="form-row">
 			<label>Nombre</label>
 			<input #test type="text" class="form-control" placeholder="Nombre de empleado" formControlName="nomEmpleado">
 			<small class="form-text text-danger" 
 							*ngIf="formEmpleados.get('nomEmpleado').getError('required') && formEmpleados.get('nomEmpleado').dirty" >	
 							El nombre de empleado es requerido</small>
 		</div>
+
     <div class="form-row">
         <label>Apellido</label>
         <input type="text" class="form-control" placeholder="Apellido" formControlName="apellidoEmpleado">
 				<small class="form-text text-danger" 
 								*ngIf="formEmpleados.get('apellidoEmpleado').getError('required') && formEmpleados.get('apellidoEmpleado').dirty" >
 								El apellido de empleado es requerido</small>
-    </div>
+		</div>
+		
     <div class="form-row">
         <label>Edad</label>
-        <input type="text" class="form-control" placeholder="Edad" formControlName="numEdad">
+        <input type="number" class="form-control" placeholder="Edad" formControlName="numEdad">
 				<small class="form-text text-danger" 
 								*ngIf="formEmpleados.get('numEdad').getError('required') && formEmpleados.get('numEdad').dirty" >
-								El apellido de empleado es requerido</small>
+								La edad es requerida</small>
 		</div>
+
 		<br>
 		<div class="form-row">
-
-			<div class="col-md-6">
-				<div *ngFor="let rol of rolesEmpleados">
-					<span>{{ rol.desRol }}</span>
-					<input type="radio" name="idRol" 
-					[checked]="idx === 0" 
-					[value]="rol.idRol" 
-					(change)="onSelectionChange(rol)">
+			<div class="col-md-5 border rounded">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Rol:</label>
+					</div>
+					<div class="col-md-9">
+						<div *ngFor="let rol of rolesEmpleados" class="alinearIzquierda">
+							<input type="radio" name="Roles" 
+							[checked]="rol.idRol === formEmpleados.get('idRol').value" 
+							[value]="rol.idRol" 
+							(change)="onChangeRol(rol)">
+							<span>{{rol.desRol}}</span>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-			<div class="col-md-6">
-				<div *ngFor="let tipo of tiposEmpleados">
-					<span>{{ tipo.desTipoEmpleado }}</span>
-					<input type="radio" name="idTipo" 
-					[checked]="idx === 0" 
-					[value]="tipo.idTipo" 
-					(change)="onSelectionChange(tipo)">
+			<div class="col-md-2"></div>
+			<div class="col-md-5 border rounded">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Tipo:</label>
+					</div>
+					<div class="col-md-9">
+						<div *ngFor="let tipo of tiposEmpleados" class="alinearIzquierda">
+							<input type="radio" name="Tipos"
+							[checked]="tipo.idTipo === formEmpleados.get('idTipo').value" 
+							[value]="tipo.idTipo" 
+							(change)="onChanceTipo(tipo)">
+							<span>{{tipo.desTipoEmpleado }}</span>
+						</div>
+					</div>
 				</div>
 			</div>
-			
 		</div>
+		
 		<br>
-		<div class="row">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-3">
+		<div class="form-row">
+			<div class="col-xs-3 col-sm-3 col-md-3"></div>
+			<div class="col-xs-3 col-sm-3 col-md-3">
 				<button type="butt	on" (click)="guardarEmpleado()" class="btn btn-outline-primary" [disabled]="formEmpleados.invalid">Guardar</button>
 			</div>
-			<div class="col-xs-3">
+			<div class="col-xs-3 col-sm-3 col-md-3" >
 				<a class="btn btn-outline-danger" routerLink="/empleados">Cancelar</a>
 			</div>
 		</div>
+
 	</form>

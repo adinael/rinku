@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +22,9 @@ export function ConfigLoader(configService: ConfigService) {
     BrowserModule,
     AppRoutingModule,
     ServicesModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
+    AngularFontAwesomeModule
   ],
   providers: [
     ConfigService,

@@ -1,0 +1,38 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th *ngFor="let columna of nombreColumnas">{{columna}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of datosEmpleados">
+        <td scope="row" >{{empleado.idEmpleado}}</td>
+        <td scope="row" >{{empleado.desNombre}}</td>
+        <td scope="row" >{{empleado.desApellido}}</td>
+        <td scope="row" >{{empleado.numEdad}}</td>
+        <td scope="row" >{{empleado.idRol}}</td>
+        <td scope="row" >{{empleado.desRol}}</td>
+        <td>
+            <swal
+                #swalborrarEmpleado
+                title="¿Deseas eliminar a {{ empleado.desNombre }}?"
+                text="Tambien se eliminarán sus movimientos"
+                type="warning"
+                [options]="{ confirmButtonText: 'Eliminar',cancelButtonText: 'Cancelar' }"
+                [showCancelButton]="true"
+                [focusCancel]="true"
+                (confirm)="eliminarEmpleado(empleado.idEmpleado)">
+            </swal>
+            <fa name="cog" animation="spin"></fa> 
+            <fa icon="fa-trash-alt" name="trash2" animation="spin"></fa> 
+
+            <i class="fas fa-trash-alt"  width="24" height="24" viewBox="0 0 24 24" [swal]="swalborrarEmpleado "></i>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg"  
+            >
+              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/>
+              <path fill="none" d="M0 0h24v24H0V0z"/>
+            </svg> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>

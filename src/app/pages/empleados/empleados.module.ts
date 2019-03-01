@@ -3,15 +3,21 @@ import { CommonModule } from '@angular/common';
 import { EmpleadosComponent } from './empleados.component';
 import { EmpleadosRoutingModule } from './empleados.routing';
 import { FormEmpleadoComponent } from './form-empleado/form-empleado.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TablaEmpleadosComponent } from './tabla-empleados/tabla-empleados.component';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
-  declarations: [EmpleadosComponent, FormEmpleadoComponent],
+  declarations: [EmpleadosComponent, FormEmpleadoComponent, TablaEmpleadosComponent],
   imports: [
     EmpleadosRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module,
+    AngularFontAwesomeModule
+
   ]
 })
 export class EmpleadosModule { }

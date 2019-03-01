@@ -16,6 +16,15 @@ export class EmpleadosService {
       this.cnfg = config.getConfig();
    }
 
+   public consultarEmpleados(): Observable<any> {
+    return this.http.get(this.cnfg.apiRinku + '/empleados');
+   }
+
+   public eliminarEmpleado(idEmpleado: number): Observable<any> {
+     console.log(this.cnfg.apiRinku + '/empleados/' + idEmpleado);
+     return this.http.delete(this.cnfg.apiRinku + '/empleados/' + idEmpleado);
+   }
+
    public consultarRolesEmpleado(): Observable<any> {
     return this.http.get(this.cnfg.apiRinku + '/empleados/roles');
    }

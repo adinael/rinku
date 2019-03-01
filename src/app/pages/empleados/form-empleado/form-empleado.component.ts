@@ -14,6 +14,7 @@ export class FormEmpleadoComponent implements OnInit {
   public formEmpleados: FormGroup;
   public rolesEmpleados: any;
   public tiposEmpleados: any;
+
   @ViewChild('test') test: ElementRef;
   constructor(
     private servicioEmpleados: EmpleadosService) { }
@@ -27,10 +28,10 @@ export class FormEmpleadoComponent implements OnInit {
 
   inicializarFormulario(): FormGroup {
     return new FormGroup({
-      idEmpleado: new FormControl({value : '120', disabled: true }, Validators.required),
+      idEmpleado: new FormControl({value : '', disabled: true }),
       nomEmpleado: new FormControl('', Validators.required),
       apellidoEmpleado: new FormControl('', Validators.required),
-      numEdad: new FormControl('1', Validators.required),
+      numEdad: new FormControl('', Validators.required),
       idRol: new FormControl('1', Validators.required),
       idTipo: new FormControl('1', Validators.required)
     });
@@ -38,16 +39,22 @@ export class FormEmpleadoComponent implements OnInit {
 
   consultarRolesEmpleado(): void {
     this.servicioEmpleados.consultarRolesEmpleado().subscribe(d => {
-        console.log(d.data.roles);
         this.rolesEmpleados = d.data.roles;
     });
   }
 
   consultarTiposEmpleado(): void {
     this.servicioEmpleados.consultarTiposEmpleado().subscribe(d => {
-        console.log(d.data.tipos);
         this.tiposEmpleados = d.data.tipos;
     });
+  }
+
+  onChangeRol(rol) {
+    this.formEmpleados.get('idRol').setValue(rol.idRol);
+  }
+
+  onChanceTipo(tipo) {
+    this.formEmpleados.get('idTipo').setValue(tipo.idTipo);
   }
 
   guardarEmpleado(): void {
