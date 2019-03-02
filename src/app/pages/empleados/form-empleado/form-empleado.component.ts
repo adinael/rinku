@@ -15,7 +15,7 @@ export class FormEmpleadoComponent implements OnInit {
   public rolesEmpleados: any;
   public tiposEmpleados: any;
 
-  @ViewChild('test') test: ElementRef;
+  @ViewChild('name') name: ElementRef;
   constructor(
     private servicioEmpleados: EmpleadosService) { }
 
@@ -23,7 +23,7 @@ export class FormEmpleadoComponent implements OnInit {
     this. consultarRolesEmpleado();
     this.consultarTiposEmpleado();
     this.formEmpleados = this.inicializarFormulario();
-    this.test.nativeElement.focus();
+    this.name.nativeElement.focus();
   }
 
   inicializarFormulario(): FormGroup {
@@ -62,8 +62,8 @@ export class FormEmpleadoComponent implements OnInit {
       return;
     }
     this.servicioEmpleados.guardar(this.formEmpleados.value).subscribe( d => {
-      console.log('EL numero de empleado es: ' + d.data.response.numeroEmpleado);
       this.formEmpleados = this.inicializarFormulario();
+      this.name.nativeElement.focus();
     });
   }
 }

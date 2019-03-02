@@ -1,6 +1,9 @@
-<h5 class="card-title col-sm-6">Alta de empleados</h5>
 
-<form [formGroup]="formEmpleados" novalidate autocomplete="off" class="col-md-6 col-sm-7 col-xs-8">
+<h5 class="card-title">Alta de empleados</h5>
+<div class="row">
+	<div class="col-lg-3"></div>
+	<div class="col-lg-6">
+	<form [formGroup]="formEmpleados" novalidate autocomplete="off">
 		
 		<div class="form-row">
       <label>Número</label>
@@ -11,7 +14,7 @@
 		</div>
 		<div class="form-row">
 			<label>Nombre</label>
-			<input #test type="text" class="form-control" placeholder="Nombre de empleado" formControlName="nomEmpleado">
+			<input #name type="text" class="form-control" placeholder="Nombre de empleado" formControlName="nomEmpleado">
 			<small class="form-text text-danger" 
 							*ngIf="formEmpleados.get('nomEmpleado').getError('required') && formEmpleados.get('nomEmpleado').dirty" >	
 							El nombre de empleado es requerido</small>
@@ -82,3 +85,5 @@
 		</div>
 
 	</form>
+</div>
+</div>

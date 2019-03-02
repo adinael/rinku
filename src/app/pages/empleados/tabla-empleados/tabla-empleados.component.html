@@ -1,3 +1,7 @@
+<div class="row">
+    <a class="btn btn-outline-success btn-lg text-left" routerLink="/empleados/nuevo">Nuevo <i class="fa fa-user-plus"></i></a>
+</div>
+<br>
 <table class="table table-hover">
     <thead>
       <tr>
@@ -21,17 +25,16 @@
                 [options]="{ confirmButtonText: 'Eliminar',cancelButtonText: 'Cancelar' }"
                 [showCancelButton]="true"
                 [focusCancel]="true"
-                (confirm)="eliminarEmpleado(empleado.idEmpleado)">
-            </swal>
-            <fa name="cog" animation="spin"></fa> 
-            <fa icon="fa-trash-alt" name="trash2" animation="spin"></fa> 
-
-            <i class="fas fa-trash-alt"  width="24" height="24" viewBox="0 0 24 24" [swal]="swalborrarEmpleado "></i>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg"  
-            >
-              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/>
-              <path fill="none" d="M0 0h24v24H0V0z"/>
-            </svg> -->
+                (confirm)="eliminarEmpleado(empleado)">
+            </swal> 
+            <button type="button" class="btn btn-default" >
+                <i class="fa fa-trash-o text-danger" [swal]="swalborrarEmpleado"></i>
+            </button>
+            
+            <button type="button" class="btn btn-default">
+              <i class="fa fa-pencil-square-o text-primary"></i>
+            </button>
+              
         </td>
       </tr>
     </tbody>
