@@ -1,4 +1,4 @@
-USE rinku
+USE Nominarinku
 GO
 IF EXISTS( SELECT * from sys.objects where name = 'proc_consultarroles' and type = 'P' ) 
 BEGIN 

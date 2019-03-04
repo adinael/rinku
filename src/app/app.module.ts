@@ -3,6 +3,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +27,8 @@ export function ConfigLoader(configService: ConfigService) {
     ServicesModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgSelectModule
   ],
   providers: [
     ConfigService,

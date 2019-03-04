@@ -9,7 +9,9 @@ const routes: Routes = [
   component: EmpleadosComponent,
   children: [
       {path: '', component: TablaEmpleadosComponent},
-      {path: 'nuevo', component: FormEmpleadoComponent}
+      {path: 'nuevo', component: FormEmpleadoComponent},
+      {path: 'editar/:id', component: FormEmpleadoComponent},
+
 
   ]},
 

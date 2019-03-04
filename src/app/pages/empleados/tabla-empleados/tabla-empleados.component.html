@@ -14,8 +14,8 @@
         <td scope="row" >{{empleado.desNombre}}</td>
         <td scope="row" >{{empleado.desApellido}}</td>
         <td scope="row" >{{empleado.numEdad}}</td>
-        <td scope="row" >{{empleado.idRol}}</td>
         <td scope="row" >{{empleado.desRol}}</td>
+        <td scope="row" >{{empleado.desTipoEmpleado}}</td>
         <td>
             <swal
                 #swalborrarEmpleado
@@ -27,13 +27,13 @@
                 [focusCancel]="true"
                 (confirm)="eliminarEmpleado(empleado)">
             </swal> 
-            <button type="button" class="btn btn-default" >
+            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Eliminar">
                 <i class="fa fa-trash-o text-danger" [swal]="swalborrarEmpleado"></i>
             </button>
             
-            <button type="button" class="btn btn-default">
+            <a class="btn btn-default" title="Editar" routerLink="editar/{{empleado.idEmpleado}}">
               <i class="fa fa-pencil-square-o text-primary"></i>
-            </button>
+            </a>
               
         </td>
       </tr>

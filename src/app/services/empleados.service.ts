@@ -20,6 +20,18 @@ export class EmpleadosService {
     return this.http.get(this.cnfg.apiRinku + '/empleados');
    }
 
+   public consultarEmpleado(idEmpleado): Observable<any> {
+    return this.http.get(this.cnfg.apiRinku + '/empleados/' + idEmpleado);
+   }
+
+   public consultarSiguienteNumeroEmpleado(): Observable<any> {
+    return this.http.get(this.cnfg.apiRinku + '/empleados/numeros/siguiente');
+   }
+
+   public consultarNumerosEmpleado(): Observable<any> {
+    return this.http.get(this.cnfg.apiRinku + '/empleados/numeros');
+   }
+
    public eliminarEmpleado(idEmpleado: number): Observable<any> {
      console.log(this.cnfg.apiRinku + '/empleados/' + idEmpleado);
      return this.http.delete(this.cnfg.apiRinku + '/empleados/' + idEmpleado);
@@ -35,5 +47,9 @@ export class EmpleadosService {
 
   public guardar(empleado: Empleado): Observable<any> {
     return this.http.post(this.cnfg.apiRinku + '/empleados', empleado);
+  }
+
+  public actualizar(idEmpleado, empleado): Observable<any> {
+    return this.http.put(this.cnfg.apiRinku + '/empleados/' + idEmpleado, empleado);
   }
 }

@@ -18,8 +18,9 @@ export class TablaEmpleadosComponent implements OnInit {
   }
 
   consultarEmpleados() {
-    this.servicioEmpleados.consultarEmpleados().subscribe(d =>
-      this.datosEmpleados = d.data.empleados);
+    this.servicioEmpleados.consultarEmpleados().subscribe(d => {
+        this.datosEmpleados = d.data.empleados;
+      })
   }
 
   eliminarEmpleado(empleado) {
