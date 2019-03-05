@@ -15,7 +15,7 @@ BEGIN
 	
 	IF(@idempleado = 0) 
 	BEGIN 
-		SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, 
+		SELECT a.id_empleado, a.des_nombre, a.des_apellido,
 				a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
 		FROM dbo.cat_empleados a (NOLOCK) 
 		JOIN dbo.cat_roles b (NOLOCK) 
@@ -25,7 +25,7 @@ BEGIN
 	END
 	ELSE 
 	BEGIN 
-		SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, 
+		SELECT a.id_empleado, a.des_nombre, a.des_apellido,
 			a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
 		FROM dbo.cat_empleados a (NOLOCK) 
 		JOIN dbo.cat_roles b (NOLOCK) 

@@ -8,7 +8,7 @@ GO
 SET ANSI_NULLS ON
 GO
 CREATE PROCEDURE dbo.proc_actualizarempleado @idempleado INT, @nombre VARCHAR(50), @apellido VARCHAR(50),
-									 @edad INT, @idrol INT, @idtipo INT 
+									 @idrol INT, @idtipo INT 
 AS 
 BEGIN 
 	SET NOCOUNT ON
@@ -16,12 +16,11 @@ BEGIN
 	SET 
 		des_nombre = @nombre,
 		des_apellido = @apellido,
-		num_edad = @edad,
 		id_rol = @idrol, 
 		id_tipo = @idtipo
 	WHERE id_empleado = @idempleado
 	
-	SELECT a.id_empleado, a.des_nombre, a.des_apellido, a.num_edad, 
+	SELECT a.id_empleado, a.des_nombre, a.des_apellido,
 		a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
 	FROM dbo.cat_empleados a (NOLOCK) 
 	JOIN dbo.cat_roles b (NOLOCK) 

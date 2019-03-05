@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServicesModule } from './services/services.module';
 import { ConfigService } from './services/config.service';
-import { MovimientosComponent } from './pages/movimientos/movimientos.component';
 
 export function ConfigLoader(configService: ConfigService) {
   return () => configService.getJSON();
@@ -19,7 +18,6 @@ export function ConfigLoader(configService: ConfigService) {
 @NgModule({
   declarations: [
     AppComponent,
-    MovimientosComponent
   ],
   imports: [
     BrowserModule,

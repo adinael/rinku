@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmpleadosService } from 'src/app/services/empleados.service';
-import { Empleado } from 'src/app/models/empleado';
-import { ActivatedRoute } from '@angular/router';
-import {Router} from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-empleado',
@@ -18,7 +15,7 @@ export class FormEmpleadoComponent implements OnInit {
   public tiposEmpleados: any;
   public numerosEmpleado: any;
   public alta = true;
-  public titulloForm = 'Alta de Empleados';
+  public tituloForm = 'Alta de Empleados';
 
   @ViewChild('name') name: ElementRef;
 
@@ -28,7 +25,7 @@ export class FormEmpleadoComponent implements OnInit {
     private servicioEmpleados: EmpleadosService) {
       if (this.route.routeConfig.path !== 'nuevo') {
         this.alta  = false;
-        this.titulloForm = 'Modificación de Empleados'
+        this.tituloForm = 'Modificación de Empleados';
       }
      }
 
@@ -52,7 +49,6 @@ export class FormEmpleadoComponent implements OnInit {
       idEmpleado: new FormControl({value : '', disabled: true }),
       nomEmpleado: new FormControl('', Validators.required),
       apellidoEmpleado: new FormControl('', Validators.required),
-      numEdad: new FormControl('', Validators.required),
       idRol: new FormControl('1', Validators.required),
       idTipo: new FormControl('1', Validators.required)
     });
@@ -101,13 +97,13 @@ export class FormEmpleadoComponent implements OnInit {
       return;
     }
 
-    if(this.alta){
+    if (this.alta) {
       this.servicioEmpleados.guardar(this.formEmpleados.value).subscribe( d => {
         this.router.navigateByUrl('/empleados');
       });
     } else {
       this.servicioEmpleados.actualizar(this.route.snapshot.paramMap.get('id'), this.formEmpleados.value).subscribe( d => {
-        if(d.data.empleado !== undefined) {
+        if (d.data.empleado !== undefined) {
           this.router.navigateByUrl('/empleados');
         }
       });

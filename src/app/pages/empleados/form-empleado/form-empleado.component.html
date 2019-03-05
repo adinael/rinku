@@ -1,5 +1,5 @@
 
-<h5 class="card-title">{{titulloForm}}</h5>
+<h5 class="card-title">{{tituloForm}}</h5>
 <div class="row">
 	<div class="col-lg-3"></div>
 	<div class="col-lg-6">
@@ -28,14 +28,6 @@
 								El apellido de empleado es requerido</small>
 		</div>
 		
-    <div class="form-row">
-        <label>Edad</label>
-        <input type="number" class="form-control" placeholder="Edad" formControlName="numEdad">
-				<small class="form-text text-danger" 
-								*ngIf="formEmpleados.get('numEdad').getError('required') && formEmpleados.get('numEdad').dirty" >
-								La edad es requerida</small>
-		</div>
-
 		<br>
 		<div class="form-row">
 			<div class="col-md-5 border rounded">
@@ -44,7 +36,7 @@
 						<label>Rol:</label>
 					</div>
 					<div class="col-md-9">
-						<div *ngFor="let rol of rolesEmpleados" class="alinearIzquierda">
+						<div *ngFor="let rol of rolesEmpleados" class="text-left">
 							<input type="radio" name="Roles" 
 							[checked]="rol.idRol === formEmpleados.get('idRol').value" 
 							[value]="rol.idRol" 
@@ -61,7 +53,7 @@
 						<label>Tipo:</label>
 					</div>
 					<div class="col-md-9">
-						<div *ngFor="let tipo of tiposEmpleados" class="alinearIzquierda">
+						<div *ngFor="let tipo of tiposEmpleados" class="text-left">
 							<input type="radio" name="Tipos"
 							[checked]="tipo.idTipo === formEmpleados.get('idTipo').value" 
 							[value]="tipo.idTipo" 
@@ -80,7 +72,7 @@
 				<button type="butt	on" (click)="guardarEmpleado()" class="btn btn-outline-primary" [disabled]="formEmpleados.invalid">Guardar</button>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3" >
-				<a class="btn btn-outline-danger" routerLink="/empleados">Cancelar</a>
+				<a class="btn btn-outline-secondary" routerLink="/empleados">Cancelar</a>
 			</div>
 		</div>
 

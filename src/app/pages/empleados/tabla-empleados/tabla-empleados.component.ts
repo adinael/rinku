@@ -8,7 +8,7 @@ import { EmpleadosService } from 'src/app/services/empleados.service';
 })
 export class TablaEmpleadosComponent implements OnInit {
 
-  public nombreColumnas = ['#', 'Nombre', 'Apellido', 'Edad', 'Rol', 'Tipo', 'Acciones'];
+  public nombreColumnas = ['#', 'Nombre', 'Apellido', 'Rol', 'Tipo', 'Acciones'];
   public datosEmpleados = [];
 
   constructor(private servicioEmpleados: EmpleadosService) { }
@@ -20,7 +20,7 @@ export class TablaEmpleadosComponent implements OnInit {
   consultarEmpleados() {
     this.servicioEmpleados.consultarEmpleados().subscribe(d => {
         this.datosEmpleados = d.data.empleados;
-      })
+      });
   }
 
   eliminarEmpleado(empleado) {

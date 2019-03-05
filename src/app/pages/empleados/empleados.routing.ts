@@ -5,8 +5,7 @@ import { FormEmpleadoComponent } from './form-empleado/form-empleado.component';
 import { TablaEmpleadosComponent } from './tabla-empleados/tabla-empleados.component';
 
 const routes: Routes = [
-  {path: '',
-  component: EmpleadosComponent,
+  {path: '', component: EmpleadosComponent,
   children: [
       {path: '', component: TablaEmpleadosComponent},
       {path: 'nuevo', component: FormEmpleadoComponent},

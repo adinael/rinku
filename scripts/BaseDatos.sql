@@ -11,7 +11,7 @@ CREATE TABLE ctl_movimientos
     id_empleado INT NOT NULL DEFAULT 0,
     fec_diatrabajado DATE NOT NULL DEFAULT '1900-01-01',
     num_entregas INT NOT NULL DEFAULT 0,
-    id_empleadocubre INT NOT NULL DEFAULT 0,
+    id_rolcubre INT NOT NULL DEFAULT 0,
     fec_movimiento SMALLDATETIME NOT NULL DEFAULT GETDATE()
 )
 GO
@@ -24,7 +24,6 @@ CREATE TABLE cat_empleados(
     id_empleado INT IDENTITY(100,10),
 	des_nombre VARCHAR(50) NOT NULL DEFAULT '',
 	des_apellido VARCHAR(50) NOT NULL DEFAULT '',
-	num_edad INT NOT NULL DEFAULT 0,
     id_rol INT NOT NULL DEFAULT 0,
     id_tipo INT NOT NULL DEFAULT 0
 )

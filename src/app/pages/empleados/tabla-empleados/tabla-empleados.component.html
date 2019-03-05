@@ -2,7 +2,7 @@
     <a class="btn btn-outline-success btn-lg text-left" routerLink="/empleados/nuevo">Nuevo <i class="fa fa-user-plus"></i></a>
 </div>
 <br>
-<table class="table table-hover">
+<table class="overflow-auto table table-hover">
     <thead>
       <tr>
         <th *ngFor="let columna of nombreColumnas">{{columna}}</th>
@@ -13,7 +13,6 @@
         <td scope="row" >{{empleado.idEmpleado}}</td>
         <td scope="row" >{{empleado.desNombre}}</td>
         <td scope="row" >{{empleado.desApellido}}</td>
-        <td scope="row" >{{empleado.numEdad}}</td>
         <td scope="row" >{{empleado.desRol}}</td>
         <td scope="row" >{{empleado.desTipoEmpleado}}</td>
         <td>
