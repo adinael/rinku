@@ -4,6 +4,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AccordionModule } from 'primeng/accordion';
+import {CalendarModule} from 'primeng/calendar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +30,11 @@ export function ConfigLoader(configService: ConfigService) {
     HttpClientModule,
     SweetAlert2Module.forRoot(),
     AngularFontAwesomeModule,
-    NgSelectModule
+    NgSelectModule,
+    AccordionModule,
+    BrowserAnimationsModule,
+    CalendarModule,
+    AutoCompleteModule
   ],
   providers: [
     ConfigService,

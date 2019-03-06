@@ -6,7 +6,7 @@ import { FormMovimientosComponent} from './form-movimientos/form-movimientos.com
 const routes: Routes = [
   {path: '', component: MovimientosComponent,
   children: [
-    { path: 'empleados/:idEmpleado/dias/:dia/meses/:mes/anios/:anio', component: FormMovimientosComponent },
+    { path: 'nuevo', component: FormMovimientosComponent },
   ]},
 
 ];

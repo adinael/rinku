@@ -52,4 +52,8 @@ export class EmpleadosService {
   public actualizar(idEmpleado, empleado): Observable<any> {
     return this.http.put(this.cnfg.apiRinku + '/empleados/' + idEmpleado, empleado);
   }
+
+  public buscarEmpleados(idEmpleado): Observable<any> {
+    return this.http.get(this.cnfg.apiRinku + '/empleados/busquedas/' + idEmpleado);
+  }
 }

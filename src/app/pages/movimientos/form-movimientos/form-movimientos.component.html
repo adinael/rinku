@@ -1,10 +1,79 @@
 
 <h5 class="card-title">{{tituloForm}}</h5>
 
-<div class="row">
+<div class="row text-left">
 	<div class="col-lg-3"></div>
 	<div class="col-lg-6">
-    	<form [formGroup]="formMovimientos" novalidate autocomplete="off"></form>
+    <form [formGroup]="formMovimientos" novalidate autocomplete="off">
+
       
+          <div class="row no-margin-left">
+              <label>Numero de Empleado</label>
+          </div>
+          <div class="row  no-margin-left">
+              <p-autoComplete formControlName="idEmpleado" [suggestions]="numEmpleados" (completeMethod)="buscarNumerosEmpleados($event)"
+              (onClear)="limpiarCampos()" [forceSelection]="true"  [dropdown]="true" (onSelect)="consultarEmpleado()" ></p-autoComplete>
+            <small class="form-text text-danger" 
+                    *ngIf="formMovimientos.get('idEmpleado').getError('required') && formMovimientos.get('idEmpleado').dirty" >
+                    El numero de empleado es requerido</small>
+          </div>
+
+          <div class="form-row">
+              <div class="col">
+                <label>Nombre</label>
+                <input #name type="text" class="form-control" placeholder="Nombre de empleado" formControlName="nomEmpleado">
+              </div>
+
+              <div class="col">
+                <label>Apellido</label>
+                <input type="text" class="form-control" placeholder="Apellido de empleado" formControlName="apellidoEmpleado">
+              </div>
+          </div>
+
+          <div class="form-row">
+              <div class="col">
+                <label>Rol</label>
+                <input #rol type="text" class="form-control" placeholder="Rol de empleado" formControlName="rolEmpleado">
+              </div>
+
+              <div class="col">
+                <label>Tipo</label>
+                <input type="text" class="form-control" placeholder="Tipo de empleado" formControlName="tipoEmpleado">           
+              </div>
+          </div>
+
+          <div class="row no-margin-left">
+            <label>Fecha</label>
+          </div>
+          <div class="row  no-margin-left">
+            <p-calendar formControlName="fecha" dateformat="dd/mm/yy" [locale]="es" (onSelect)="consultarMovimiento()"></p-calendar>
+            <small class="form-text text-danger" 
+                    *ngIf="formMovimientos.get('fecha').getError('required') && formMovimientos.get('fecha').dirty" >
+                    La fecha es requerida</small>
+          </div>
+
+          <div class="form-row">
+              <div class="col">
+                <label>Rol</label>
+                <input #entregas type="number" class="form-control" placeholder="Numero  de entregas" formControlName="numeroEntregas">
+              </div>
+
+              <div class="col">
+                <label>Tipo</label>
+                <input type="text" class="form-control" placeholder="Rol cubierto" formControlName="idRolCubre">           
+              </div>
+          </div>
+          <br>
+          <div class="form-row">
+            <div class="col-xs-3 col-sm-3 col-md-3"></div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+              <button type="button" (click)="guardarEmpleado()" class="btn btn-outline-primary" [disabled]="formMovimientos.invalid">Guardar</button>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3" >
+              <a class="btn btn-outline-secondary" routerLink="/empleados">Cancelar</a>
+            </div>
+          </div>      
+
+    </form>
   </div>
 </div>
