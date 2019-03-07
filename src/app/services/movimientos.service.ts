@@ -8,6 +8,7 @@ import { ConfigService } from './config.service';
   providedIn: 'root'
 })
 export class MovimientosService {
+
   private cnfg: any;
 
   constructor(
@@ -22,5 +23,9 @@ export class MovimientosService {
 
    consultarMovimiento(idEmpleado: any, fecha: any): any {
     return this.http.get(this.cnfg.apiRinku + '/movimientos/empleados/' + idEmpleado + '/fechas/' + fecha);
+  }
+
+  guardarMovimiento(movimiento: any): any {
+   return this.http.post(this.cnfg.apiRinku + '/movimientos/', movimiento);
   }
 }

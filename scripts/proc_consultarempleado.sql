@@ -16,7 +16,7 @@ BEGIN
 	IF(@idempleado = 0) 
 	BEGIN 
 		SELECT a.id_empleado, a.des_nombre, a.des_apellido,
-				a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
+				a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado, b.opc_cubreroles
 		FROM dbo.cat_empleados a (NOLOCK) 
 		JOIN dbo.cat_roles b (NOLOCK) 
 			ON(a.id_rol = b.id_rol) 
@@ -26,7 +26,7 @@ BEGIN
 	ELSE 
 	BEGIN 
 		SELECT a.id_empleado, a.des_nombre, a.des_apellido,
-			a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado
+			a.id_rol, b.des_rol, a.id_tipo, c.des_tipoempleado, b.opc_cubreroles
 		FROM dbo.cat_empleados a (NOLOCK) 
 		JOIN dbo.cat_roles b (NOLOCK) 
 			ON(a.id_rol = b.id_rol) 
