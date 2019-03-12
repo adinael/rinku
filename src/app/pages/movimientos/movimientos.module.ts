@@ -9,9 +9,10 @@ import {MessageModule} from 'primeng/message';
 import { FormMovimientosComponent } from './form-movimientos/form-movimientos.component';
 import { MovimientosRoutingModule } from './movimientos.routing';
 import { MovimientosComponent } from './movimientos.component';
+import { TablaMovimientosComponent } from './tabla-movimientos/tabla-movimientos.component';
 
 @NgModule({
-  declarations: [MovimientosComponent, FormMovimientosComponent],
+  declarations: [MovimientosComponent, FormMovimientosComponent, TablaMovimientosComponent],
   imports: [
     CommonModule,
     FormsModule,

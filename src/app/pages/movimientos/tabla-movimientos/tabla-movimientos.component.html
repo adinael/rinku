@@ -1,0 +1,36 @@
+<a class="btn btn-outline-success btn-lg text-left" routerLink="/movimientos/abcmovimientos">Nuevo <i class="fa fa-user-plus"></i></a>
+
+<!-- <div class="row">
+<table class="overflow-auto table table-hover">
+    <thead>
+      <tr>
+        <th *ngFor="let columna of nombreColumnas">{{columna}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movimiento of datosmovimientos">
+        <td scope="row" >{{movimiento.idmovimiento}}</td>
+        <td scope="row" >{{movimiento.desNombre}}</td>
+        <td>
+            <swal
+                #swalborrarmovimiento
+                title="¿Deseas eliminar a {{ movimiento.desNombre }}?"
+                text="Tambien se eliminarán sus movimientos"
+                type="warning"
+                [options]="{ confirmButtonText: 'Eliminar',cancelButtonText: 'Cancelar' }"
+                [showCancelButton]="true"
+                [focusCancel]="true"
+                (confirm)="eliminarmovimiento(movimiento)">
+            </swal> 
+            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                <i class="fa fa-trash-o text-danger" [swal]="swalborrarmovimiento"></i>
+            </button>
+            
+            <a class="btn btn-default" title="Editar" routerLink="editar/{{movimiento.idmovimiento}}">
+              <i class="fa fa-pencil-square-o text-primary"></i>
+            </a>
+              
+        </td>
+      </tr>
+    </tbody>
+  </table> -->

@@ -5,8 +5,8 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AccordionModule } from 'primeng/accordion';
-import {CalendarModule} from 'primeng/calendar';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { CalendarModule} from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
 

@@ -25,7 +25,7 @@ export class EmpleadosService {
    }
 
    public consultarSiguienteNumeroEmpleado(): Observable<any> {
-    return this.http.get(this.cnfg.apiRinku + '/empleados/numeros/siguiente');
+    return this.http.get(`${this.cnfg.apiRinku}/empleados/numeros/siguiente`);
    }
 
    public consultarNumerosEmpleado(): Observable<any> {

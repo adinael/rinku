@@ -100,7 +100,7 @@ export class FormMovimientosComponent implements OnInit {
   }
 
   formatoFechayymmdd( fecha ) {
-    return fecha.getUTCFullYear() + '-' + fecha.getUTCMonth() + '-' + fecha.getUTCDate();
+    return fecha.getUTCFullYear() + '-' + (fecha.getUTCMonth() + 1) + '-' + fecha.getUTCDate();
   }
 
   consultarMovimiento() {
@@ -113,6 +113,8 @@ export class FormMovimientosComponent implements OnInit {
         if (d.data.movimiento !== null) {
           this.formMovimientos.get('numEntregas').setValue(d.data.movimiento.numEntregas);
           this.formMovimientos.get('idRolCubre').setValue(d.data.movimiento.idRolCubre);
+        } else {
+          this.formMovimientos.get('numEntregas').setValue('');
         }
       });
     }
@@ -121,6 +123,7 @@ export class FormMovimientosComponent implements OnInit {
   guardarMovimiento() {
     const movimiento  = this.formMovimientos.value;
     movimiento.fecha = this.formatoFechayymmdd(this.formMovimientos.get('fecha').value);
+    console.log(movimiento.fecha);
     if (movimiento.idRolCubre === undefined) {
       movimiento.idRolCubre = this.formMovimientos.get('idRolCubre').value;
     }

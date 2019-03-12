@@ -20,3 +20,4 @@ BEGIN
 		AND MONTH(a.fec_diatrabajado) = @mes
 END 
 GO
+
