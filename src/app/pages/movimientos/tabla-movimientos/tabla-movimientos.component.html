@@ -1,36 +1,65 @@
-<a class="btn btn-outline-success btn-lg text-left" routerLink="/movimientos/abcmovimientos">Nuevo <i class="fa fa-user-plus"></i></a>
+<form [formGroup]="tablaMovimientos" novalidate autocomplete="off">
+  <div class="form-row align-items-center">
+      
+    <div class="col-md-4 col-xs-4">
+      <h6>Numero de Empleado</h6>
+      <p-autoComplete formControlName="idEmpleado" [suggestions]="numEmpleados" (completeMethod)="buscarNumerosEmpleados($event)"
+      (onClear)="inicializarPantalla()" [forceSelection]="true"  [dropdown]="true"  (onSelect)="consultarMovimientosEmpleadoMes()"></p-autoComplete>
+      <small class="form-text text-danger" 
+      *ngIf="tablaMovimientos.get('idEmpleado').getError('required') && tablaMovimientos.get('idEmpleado').dirty" >
+      El numero de empleado es requerido</small>
+    </div>
 
-<!-- <div class="row">
-<table class="overflow-auto table table-hover">
+    <div class="col-md-4 col-xs-4">
+      <h6>Fecha</h6>
+      <p-calendar formControlName="fecha" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" [locale]="es" 
+      (onSelect)=" consultarMovimientosEmpleadoMes()" [showIcon]="true"></p-calendar>
+      <small class="form-text text-danger" 
+      *ngIf="tablaMovimientos.get('fecha').getError('required') && tablaMovimientos.get('fecha').dirty" >
+      La fecha es requerida</small>
+    </div>
+
+    <div class="col-md-4 col-xs-4">
+      <a class="btn btn-outline-success text-left" routerLink="/movimientos/abcmovimientos">Agregar <i class="fa fa-truck"></i></a>
+    </div>
+
+  </div>
+</form>
+<br>
+<div class="row">
+<table class="overflow-auto table table-hover" *ngIf="datosMovimientos.length > 0">
     <thead>
       <tr>
         <th *ngFor="let columna of nombreColumnas">{{columna}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let movimiento of datosmovimientos">
-        <td scope="row" >{{movimiento.idmovimiento}}</td>
-        <td scope="row" >{{movimiento.desNombre}}</td>
+      <tr *ngFor="let movimiento of datosMovimientos">
+          <td scope="row" >{{movimiento.idEmpleado}}</td>
+          <td scope="row" >{{movimiento.desNombre}}</td>
+          <td scope="row" >{{movimiento.desRol}}</td>
+          <td scope="row" >{{movimiento.fecDiaTrabajado}}</td>
+          <td scope="row" >{{movimiento.numEntregas}}</td>
         <td>
             <swal
                 #swalborrarmovimiento
-                title="¿Deseas eliminar a {{ movimiento.desNombre }}?"
-                text="Tambien se eliminarán sus movimientos"
+                title="¿Deseas eliminar el movimiento?"
+                text="esto es irrecuperable"
                 type="warning"
                 [options]="{ confirmButtonText: 'Eliminar',cancelButtonText: 'Cancelar' }"
                 [showCancelButton]="true"
                 [focusCancel]="true"
-                (confirm)="eliminarmovimiento(movimiento)">
+                (confirm)="eliminarMovimiento(movimiento)">
             </swal> 
             <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Eliminar">
                 <i class="fa fa-trash-o text-danger" [swal]="swalborrarmovimiento"></i>
             </button>
             
-            <a class="btn btn-default" title="Editar" routerLink="editar/{{movimiento.idmovimiento}}">
+            <a class="btn btn-default" title="Editar" routerLink="editar/{{movimiento.idMovimiento}}">
               <i class="fa fa-pencil-square-o text-primary"></i>
             </a>
-              
         </td>
       </tr>
     </tbody>
-  </table> -->
+  </table>
+</div>

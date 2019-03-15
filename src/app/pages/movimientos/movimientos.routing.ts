@@ -8,7 +8,8 @@ const routes: Routes = [
   {path: '', component: MovimientosComponent,
   children: [
     { path: '', component: TablaMovimientosComponent },
-    { path: 'abcmovimientos', component: FormMovimientosComponent }
+    { path: 'abcmovimientos', component: FormMovimientosComponent },
+    { path: 'editar/:id', component: FormMovimientosComponent }
   ]},
 
 ];

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EmpleadosService } from './empleados.service';
 import { ConfigService } from './config.service';
 import { MovimientosService } from './movimientos.service';
+import { NominaService } from './nomina.service';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MovimientosService } from './movimientos.service';
   providers: [
     ConfigService,
     EmpleadosService,
-    MovimientosService
+    MovimientosService,
+    NominaService
   ]
 })
 export class ServicesModule {

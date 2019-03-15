@@ -6,13 +6,12 @@
 	<div class="col-lg-6">
     <form [formGroup]="formMovimientos" novalidate autocomplete="off">
 
-      
           <div class="row no-margin-left">
               <label>Numero de Empleado</label>
           </div>
           <div class="row  no-margin-left">
               <p-autoComplete formControlName="idEmpleado" [suggestions]="numEmpleados" (completeMethod)="buscarNumerosEmpleados($event)"
-              (onClear)="limpiarCampos()" [forceSelection]="true"  [dropdown]="true" (onSelect)="consultarEmpleado()" ></p-autoComplete>
+              (onClear)="inicializarPantalla()" [forceSelection]="true"  [dropdown]="true" (onSelect)="consultarEmpleado()" ></p-autoComplete>
             <small class="form-text text-danger" 
                     *ngIf="formMovimientos.get('idEmpleado').getError('required') && formMovimientos.get('idEmpleado').dirty" >
                     El numero de empleado es requerido</small>
@@ -46,7 +45,7 @@
             <label>Fecha</label>
           </div>
           <div class="row  no-margin-left">
-            <p-calendar formControlName="fecha" dateformat="dd/mm/yy" [locale]="es" (onSelect)="consultarMovimiento()"></p-calendar>
+            <p-calendar formControlName="fecha" dateFormat="dd/mm/yy" [locale]="es" [showIcon]="true" (onSelect)="consultarMovimiento()"></p-calendar>
             <small class="form-text text-danger" 
                     *ngIf="formMovimientos.get('fecha').getError('required') && formMovimientos.get('fecha').dirty" >
                     La fecha es requerida</small>
@@ -55,7 +54,7 @@
           <div class="form-row">
               <div class="col">
                 <label>Numero de entregas</label>
-                <input #entregas type="number" class="form-control" placeholder="Numero  de entregas" formControlName="numEntregas">
+                <input #entregas type="number" min="0" class="form-control" placeholder="Numero  de entregas" formControlName="numEntregas">
               </div>
 
               <div class="col">
@@ -67,12 +66,12 @@
               </div>
           </div>
           <br>
-          <div class="form-row">
-            <div class="col-xs-3 col-sm-3 col-md-3"></div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="row">
+            <div class="col-xs-4 col-sm-3 col-md-3"></div>
+            <div class="col-xs-4 col-sm-3 col-md-3">
               <button type="button" (click)="guardarMovimiento()" class="btn btn-outline-primary" [disabled]="formMovimientos.invalid">Guardar</button>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3" >
+            <div class="col-xs-4 col-sm-3 col-md-3" >
               <a class="btn btn-outline-secondary" routerLink="/movimientos">Cancelar</a>
             </div>
           </div>      

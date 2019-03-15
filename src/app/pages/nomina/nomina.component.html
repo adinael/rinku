@@ -1,0 +1,53 @@
+<div class="card text-center">
+  <div class="card-header">
+    Nomina Rinku
+  </div>
+  <div class="card-body container">
+
+      <form [formGroup]="formNomina" novalidate autocomplete="off">
+          <div class="form-row align-items-center">
+            <div class="col-md-4 col-xs-4">
+                <h6>Mes</h6>
+                <p-calendar formControlName="fecha" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" [locale]="es" 
+                (onSelect)="consultarNomina()" [showIcon]="true"></p-calendar>
+                <small class="form-text text-danger" 
+                *ngIf="formNomina.get('fecha').getError('required') && formNomina.get('fecha').dirty" >
+                La fecha es requerida</small>
+            </div>
+            
+            <div class="col-md-4 col-xs-4">
+              <h6>Numero de Empleado</h6>
+              <p-autoComplete formControlName="idEmpleado" [suggestions]="numEmpleados" (completeMethod)="buscarNumerosEmpleados($event)"
+              (onClear)="limpiarEmpleado()" [forceSelection]="true"  [dropdown]="true"  (onSelect)="consultarNomina()"></p-autoComplete>
+            </div>
+          </div>
+        </form>
+  </div>
+</div>
+
+<br>
+<div class="container">
+<table class="table table-sm table-hover text-right" *ngIf="datosNomina.length > 0">
+    <thead>
+      <tr>
+        <th *ngFor="let columna of nombreColumnas" class="text-center">{{columna}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let nomina of datosNomina" (onclick)="visualizarEmpleado(nomina.idEmpleado)">
+          <td class="text-left" scope="row" >{{nomina.desNombre}}</td>
+          <td class="text-left" scope="row" >{{nomina.desRol}}</td>
+          <td scope="row" >{{nomina.numTotalEntregas}}</td>
+          <td scope="row" >{{nomina.impAdicionalPorEntrega | currency}}</td>
+          <td scope="row" >{{nomina.impBonoPorHoras | currency}}</td>
+          <td scope="row" >{{nomina.impSueldo | currency}}</td>
+          <td scope="row" >{{nomina.impIsr | currency}}</td>
+          <td scope="row" >{{nomina.impIsrAdicional | currency}}</td>
+          <td scope="row" >{{nomina.impSueldoTotal | currency}}</td>
+          <td scope="row" >{{nomina.impValeDespensa | currency}}</td>
+          <td scope="row" >{{nomina.impTotalPagar | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

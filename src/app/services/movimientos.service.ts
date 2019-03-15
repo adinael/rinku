@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Empleado } from '../models/empleado';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class MovimientosService {
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService) {
+    config: ConfigService) {
       this.cnfg = config.getConfig();
    }
 
@@ -25,7 +24,20 @@ export class MovimientosService {
     return this.http.get(this.cnfg.apiRinku + '/movimientos/empleados/' + idEmpleado + '/fechas/' + fecha);
   }
 
+
+  consultarMovimientoPorId(idMovimiento): any {
+    return this.http.get(`${this.cnfg.apiRinku}/movimientos/${idMovimiento}`);
+  }
+
+  consultarMovimientosEmpleadoMes(idEmpleado: number, anio: number, mes: number): any {
+    return this.http.get(`${this.cnfg.apiRinku}/movimientos/empleados/${idEmpleado}/anios/${anio}/meses/${mes}`);
+  }
+
   guardarMovimiento(movimiento: any): any {
    return this.http.post(this.cnfg.apiRinku + '/movimientos/', movimiento);
+  }
+
+  eliminarMovimiento(idMovimiento): any {
+    return this.http.delete(`${this.cnfg.apiRinku}/movimientos/${idMovimiento}`);
   }
 }

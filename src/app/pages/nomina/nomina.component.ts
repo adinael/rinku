@@ -2,26 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { EmpleadosService } from 'src/app/services/empleados.service';
-import { MovimientosService } from 'src/app/services/movimientos.service';
-@Component({
-  selector: 'app-tabla-movimientos',
-  templateUrl: './tabla-movimientos.component.html',
-  styleUrls: ['./tabla-movimientos.component.css']
-})
-export class TablaMovimientosComponent implements OnInit {
+import { NominaService } from 'src/app/services/nomina.service';
 
-  public tablaMovimientos: FormGroup;
-  public nombreColumnas = ['#', 'Nombre', 'Rol', 'Fecha', 'Cantidad', 'Acciones'];
-  public datosMovimientos = [];
-  public numEmpleados: string[];
+@Component({
+  selector: 'app-nomina',
+  templateUrl: './nomina.component.html',
+  styleUrls: ['./nomina.component.css']
+})
+export class NominaComponent implements OnInit {
+
+  public formNomina: FormGroup;
+  public nombreColumnas: any;
+  public datosNomina: [];
   public es: any;
+  public numEmpleados: string[];
 
   constructor( private servicioEmpleados: EmpleadosService,
-               private servicioMovimientos: MovimientosService ) { }
+               private servicioNomina: NominaService) { }
 
   ngOnInit() {
-    this.inicializarPantalla();
 
+    this.inicializarPantalla();
+    // tslint:disable-next-line:max-line-length
+    this.nombreColumnas = ['Nombre', 'Rol', 'Entregas', '$ Entregas', 'Bono', 'Sueldo Base', 'ISR', 'ISR adicional', 'Sueldo Total', 'Vale Despensa', 'A Pagar'];
     this.es = {
       firstDayOfWeek: 0,
       dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
@@ -37,14 +40,14 @@ export class TablaMovimientosComponent implements OnInit {
   }
 
   inicializarPantalla() {
-    this.tablaMovimientos = this.inicializarFormulario();
-    this.datosMovimientos = [];
+    this.formNomina = this.inicializarFormulario();
+    this.datosNomina = [];
   }
 
   inicializarFormulario(): FormGroup {
     return new FormGroup({
-      idEmpleado: new FormControl('', Validators.required),
-      fecha: new FormControl('', Validators.required)
+      fecha: new FormControl('', Validators.required),
+      idEmpleado: new FormControl('')
     });
   }
 
@@ -62,27 +65,26 @@ export class TablaMovimientosComponent implements OnInit {
     }
   }
 
-  consultarMovimientosEmpleadoMes() {
-    this.datosMovimientos = [];
-    if (!this.tablaMovimientos.invalid) {
-
-      const idEmpleado = this.tablaMovimientos.get('idEmpleado').value;
-      const anio = this.tablaMovimientos.get('fecha').value.getUTCFullYear();
-      const mes = this.tablaMovimientos.get('fecha').value.getUTCMonth() + 1;
-
-      if (idEmpleado && anio && mes) {
-        this.servicioMovimientos.consultarMovimientosEmpleadoMes(idEmpleado, anio, mes).subscribe(d => {
-          this.datosMovimientos = d.data.response;
-        });
-      }
-
-    }
+  limpiarEmpleado() {
+    this.formNomina.get('idEmpleado').setValue('');
+    this.consultarNomina();
   }
 
-  eliminarMovimiento(movimiento) {
-    this.servicioMovimientos.eliminarMovimiento(movimiento.idMovimiento).subscribe(d => {
-      this.consultarMovimientosEmpleadoMes();
-    });
+  consultarNomina() {
+
+    if (this.formNomina.valid) {
+      let idEmpleado = this.formNomina.get('idEmpleado').value;
+      const anio = this.formNomina.get('fecha').value.getUTCFullYear();
+      const mes = this.formNomina.get('fecha').value.getUTCMonth() + 1;
+
+      if (!idEmpleado) {
+        idEmpleado = 0;
+      }
+      this.servicioNomina.consultarMovimientosEmpleadoMes(idEmpleado, anio, mes).subscribe(d => {
+        this.datosNomina = d.data.nomina;
+        console.table(this.datosNomina);
+      });
+    }
   }
 
 }

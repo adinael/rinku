@@ -8,6 +8,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { CalendarModule} from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +22,7 @@ export function ConfigLoader(configService: ConfigService) {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ export function ConfigLoader(configService: ConfigService) {
     AccordionModule,
     BrowserAnimationsModule,
     CalendarModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    TabMenuModule
   ],
   providers: [
     ConfigService,

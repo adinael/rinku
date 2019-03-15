@@ -1,9 +1,9 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import { MovimientosService } from 'src/app/services/movimientos.service';
-import {Message} from 'primeng//api';
+import { Message } from 'primeng//api';
 
 @Component({
   selector: 'app-form-movimientos',
@@ -19,13 +19,20 @@ export class FormMovimientosComponent implements OnInit {
   public rolesEmpleados: any;
   public opcCubreRoles = false;
   public msgs: Message[] = [];
+  public es: any;
 
   constructor( private servicioEmpleados: EmpleadosService,
-               private servicioMovimientos: MovimientosService ) { }
-  public es: any;
+               private servicioMovimientos: MovimientosService,
+               private route: ActivatedRoute,
+               private router: Router ) {
+    if (this.route.routeConfig.path === 'editar/:id') {
+        this.alta  = false;
+        this.tituloForm = 'Modificación de movimientos';
+    }
+  }
   ngOnInit() {
     this. consultarRolesEmpleado();
-    this.limpiarCampos();
+    this.inicializarPantalla();
 
     this.es = {
         firstDayOfWeek: 0,
@@ -39,6 +46,11 @@ export class FormMovimientosComponent implements OnInit {
         clear: 'Limpiar',
         dateFormat: 'dd/mm/yy'
     };
+
+    if (!this.alta) {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.consultarMovimientoPorId(id);
+    }
   }
 
   consultarRolesEmpleado(): void {
@@ -47,19 +59,19 @@ export class FormMovimientosComponent implements OnInit {
     });
   }
 
-  limpiarCampos() {
+  inicializarPantalla() {
     this.formMovimientos = this.inicializarFormulario();
     this.formMovimientos.get('fecha').markAsPristine();
   }
 
   inicializarFormulario(): FormGroup {
     return new FormGroup({
-      idEmpleado: new FormControl('', Validators.required),
+      idEmpleado: new FormControl({value: '', disabled: !this.alta},  Validators.required),
       nomEmpleado: new FormControl({value: '', disabled: true}, Validators.required),
       apellidoEmpleado: new FormControl({value: '', disabled: true}, Validators.required),
       rolEmpleado: new FormControl({value: '', disabled: true}, Validators.required),
       tipoEmpleado: new FormControl({value: '', disabled: true}, Validators.required),
-      fecha: new FormControl('', Validators.required),
+      fecha: new FormControl({value: new Date(), disabled: !this.alta}, Validators.required),
       numEntregas: new FormControl('', Validators.required),
       idRolCubre: new FormControl({value: ''}, Validators.required),
       opcCubreRoles: new FormControl('', Validators.required)
@@ -94,7 +106,7 @@ export class FormMovimientosComponent implements OnInit {
           this.formMovimientos.get('idRolCubre').disable();
         } else {
           this.formMovimientos.get('idRolCubre').enable();
-         }
+        }
       });
     }
   }
@@ -120,16 +132,42 @@ export class FormMovimientosComponent implements OnInit {
     }
   }
 
+  consultarMovimientoPorId(idMovimiento) {
+      if (idMovimiento) {
+      this.servicioMovimientos.consultarMovimientoPorId(idMovimiento).subscribe( d => {
+        if (d.data.movimiento !== null) {
+          d.data.empleado.fecha = new Date(d.data.empleado.fecha);
+          this.formMovimientos.setValue( d.data.empleado);
+          if (d.data.empleado.opcCubreRoles === '0') {
+            this.formMovimientos.get('idRolCubre').disable();
+          } else {
+            this.formMovimientos.get('idRolCubre').enable();
+          }
+        } else {
+          this.router.navigateByUrl('/empleados');
+        }
+      });
+    }
+  }
+
   guardarMovimiento() {
     const movimiento  = this.formMovimientos.value;
     movimiento.fecha = this.formatoFechayymmdd(this.formMovimientos.get('fecha').value);
-    console.log(movimiento.fecha);
     if (movimiento.idRolCubre === undefined) {
       movimiento.idRolCubre = this.formMovimientos.get('idRolCubre').value;
     }
+    if (movimiento.idEmpleado === undefined) {
+      movimiento.idEmpleado = this.formMovimientos.get('idEmpleado').value;
+    }
+
     this.servicioMovimientos.guardarMovimiento(movimiento).subscribe( d => {
-      this.limpiarCampos();
-      this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Se grabó el movimiento '});
+      if (this.alta) {
+
+        this.inicializarPantalla();
+        this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Se grabó el movimiento '});
+      } else {
+        this.router.navigateByUrl('/movimientos');
+      }
     });
   }
 }

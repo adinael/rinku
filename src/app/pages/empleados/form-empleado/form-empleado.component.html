@@ -5,12 +5,12 @@
 	<div class="col-lg-6">
 	<form [formGroup]="formEmpleados" novalidate autocomplete="off">
 		
-		<div class="form-row">
+		<div class="form-row text-left">
       <label>Número</label>
-      <input type="text" class="form-control" placeholder="Número de empleado" formControlName="idEmpleado">
+      <input type="text" class="form-control" placeholder="NÃºmero de empleado" formControlName="idEmpleado">
 			<small class="form-text text-danger" 
 							*ngIf="formEmpleados.get('idEmpleado').getError('required') && formEmpleados.get('idEmpleado').dirty" >
-							El numero de empleado es requerido</small>
+							El número de empleado es requerido</small>
 		</div>
 		<div class="form-row">
 			<label>Nombre</label>
