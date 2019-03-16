@@ -1,8 +1,8 @@
-<div class="row">
-    <a class="btn btn-outline-success btn-lg text-left" routerLink="/empleados/nuevo">Nuevo <i class="fa fa-user-plus"></i></a>
+<div class="row text-right">
+    <a class="btn btn-outline-primary btn-lg text-left" routerLink="/empleados/nuevo">Nuevo <i class="fa fa-user-plus"></i></a>
 </div>
 <br>
-<table class="overflow-auto table table-hover">
+<table class="table table-sm table-hover">
     <thead>
       <tr>
         <th *ngFor="let columna of nombreColumnas">{{columna}}</th>
@@ -31,7 +31,7 @@
             </button>
             
             <a class="btn btn-default" title="Editar" routerLink="editar/{{empleado.idEmpleado}}">
-              <i class="fa fa-pencil-square-o text-primary"></i>
+              <i class="fa fa-pencil-square-o text-success"></i>
             </a>
               
         </td>

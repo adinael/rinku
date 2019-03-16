@@ -2,7 +2,7 @@
   <div class="form-row align-items-center">
       
     <div class="col-md-4 col-xs-4">
-      <h6>Numero de Empleado</h6>
+      <h6>Número de Empleado</h6>
       <p-autoComplete formControlName="idEmpleado" [suggestions]="numEmpleados" (completeMethod)="buscarNumerosEmpleados($event)"
       (onClear)="inicializarPantalla()" [forceSelection]="true"  [dropdown]="true"  (onSelect)="consultarMovimientosEmpleadoMes()"></p-autoComplete>
       <small class="form-text text-danger" 
@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-md-4 col-xs-4">
-      <h6>Fecha</h6>
+      <h6>Mes</h6>
       <p-calendar formControlName="fecha" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" [locale]="es" 
       (onSelect)=" consultarMovimientosEmpleadoMes()" [showIcon]="true"></p-calendar>
       <small class="form-text text-danger" 
@@ -27,7 +27,7 @@
 </form>
 <br>
 <div class="row">
-<table class="overflow-auto table table-hover" *ngIf="datosMovimientos.length > 0">
+<table class="table table-sm table-hover" *ngIf="datosMovimientos.length > 0">
     <thead>
       <tr>
         <th *ngFor="let columna of nombreColumnas">{{columna}}</th>

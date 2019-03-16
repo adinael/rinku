@@ -24,7 +24,7 @@ export class NominaComponent implements OnInit {
 
     this.inicializarPantalla();
     // tslint:disable-next-line:max-line-length
-    this.nombreColumnas = ['Nombre', 'Rol', 'Entregas', '$ Entregas', 'Bono', 'Sueldo Base', 'ISR', 'ISR adicional', 'Sueldo Total', 'Vale Despensa', 'A Pagar'];
+    this.nombreColumnas = ['Nombre', 'Rol', 'Entregas', '$ Entregas', 'Bono', 'Sueldo Base', 'ISR', 'ISR Adicional', 'Sueldo Total', 'Vale Despensa', 'A Pagar'];
     this.es = {
       firstDayOfWeek: 0,
       dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
